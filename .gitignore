@@ -1,0 +1,30 @@
+# Build outputs
+build/
+build*/
+*.o
+*.so
+*.a
+*.out
+mouse
+keyboard
+mouse_absolute
+fps-aiming
+__pycache__/
+*.pyc
+
+# Model files (large, do not commit to git)
+*.rknn
+*.onnx
+*.pt
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*~
+
+# Output logs
+*.log
+
+# Temp
+*.tmp
