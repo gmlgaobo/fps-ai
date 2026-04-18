@@ -32,15 +32,23 @@ CONFIG_USB_F_HID=y
 
 ## 启用OTG模式
 
-在RK3588开发板上，可能需要配置OTG模式：
+定昌RK3588开发板Ubuntu22.04系统默认USB-OTG接口为host模式，要模拟鼠标键盘(USB HID)必须修改为otg从设备模式，修改后重启生效：
 
 ```bash
-# 检查当前模式
-cat /sys/devices/platform/fe8a0000.usb2/mode
+# 查看当前模式
+cat /sys/devices/platform/fd5d0000.syscon/fd5d0000.syscon\:usb2-phy@0/otg_mode
 
-# 设置为设备模式
-echo peripheral > /sys/devices/platform/fe8a0000.usb2/mode
+# 切换为otg从设备模式
+echo otg > /sys/devices/platform/fd5d0000.syscon/fd5d0000.syscon\:usb2-phy@0/otg_mode
 ```
+
+**验证方法：**
+```bash
+root@RK3588:/# cat /sys/devices/platform/fd5d0000.syscon/fd5d0000.syscon\:usb2-phy@0/otg_mode
+otg
+```
+
+切换完成后，USB-OTG端口即工作在从设备模式，可以连接游戏主机USB口实现模拟鼠标，或者连接电脑开启ADB调试。
 
 ## 开机自启（可选）
 
